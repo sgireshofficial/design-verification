@@ -1,0 +1,757 @@
+===============================================================================
+Module : apb_slave
+===============================================================================
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 45.34  83.05  37.50   1.42 --      59.38 --     
+
+Source File(s) : 
+
+/home/dvft0904/apb_sv_project/sim/../rtl/apb_slave_design.sv
+
+Module self-instances :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME        
+ 45.34  83.05  37.50   1.42 --      59.38 --     apb_top.dut 
+
+
+
+-------------------------------------------------------------------------------
+Line Coverage for Module : apb_slave
+
+             Line No.   Total   Covered  Percent
+TOTAL                       59       49    83.05
+ALWAYS             31        6        6   100.00
+ALWAYS             43        6        2    33.33
+ALWAYS             54        1        1   100.00
+INITIAL            60        3        3   100.00
+ALWAYS             68       13       13   100.00
+ALWAYS            116       30       24    80.00
+
+30                        always @ (negedge dif.pclk) begin
+31         1/1              if (!dif.rst_n) begin
+32         1/1                   data_in  <= 0;
+33         1/1                   ctl_reg  <= 0; 
+34         1/1                   stat_reg <= 0; 
+35         1/1                   timer_0  <= 32'hcafe_1234; 
+36         1/1                   timer_1  <= 32'hface_5678;
+37                            end
+                        MISSING_ELSE
+38                         end
+39                      
+40                      
+41                         // Provide read data
+42                         always @ (dif.penable) begin
+43         1/1                if (dif.psel & !dif.pwrite) 
+44         1/1                   case (dif.paddr)
+45         0/1     ==>              'h0 : rdata_tmp <= ctl_reg;
+46         0/1     ==>              'h4 : rdata_tmp <= timer_0;
+47         0/1     ==>              'h8 : rdata_tmp <= timer_1;
+48         0/1     ==>              'hc : rdata_tmp <= stat_reg;
+                        MISSING_DEFAULT
+                        MISSING_ELSE
+49                               endcase
+50                         end
+51                      
+52                        
+53                         always@(negedge dif.pclk) begin
+54         1/1             	dif.pslverr   <= err_enable && (dif.paddr == err_addr);
+55                          
+56                         end
+57                         
+58                         initial 
+59                            begin
+60         1/1                      if ($test$plusargs("zerowaitstate"))begin   //argument to disable wait states
+61         1/1                             busy_rand_enable = 0;
+62         1/1                             busy_delay       = 0;
+63                                      end
+                        MISSING_ELSE
+64                            end
+65                      
+66                         always @(posedge dif.pclk) 
+67                           begin
+68         2/2                  #1ps;
+69         1/1                  if (dif.psel)
+70                                begin
+71         1/1                       if (busy_rand_enable)
+72                                     begin
+73         1/1                            busy_delay = $urandom_range(busy_min, busy_max);
+74                                     end
+                        MISSING_ELSE
+75         1/1                       if (busy_delay > 0)
+76                                     begin
+77         1/1                            dif.pready = 1'b0;
+78         1/1                            repeat (busy_delay)
+79                                          begin
+80         2/2                                @(posedge dif.pclk); 
+81                                          end
+                        REPEAT_FALSE
+82         1/1                            dif.pready = 1'b1;
+83         2/2                           @(posedge dif.pclk);   
+84                      				  end
+                        MISSING_ELSE
+85                                end
+                        MISSING_ELSE
+86                           end
+87                      
+88                      
+89                         task set_random_delay;
+90                            input [31:0] delay_min;
+91                            input [31:0] delay_max;
+92                            begin
+93                               busy_rand_enable = 1;
+94                               busy_min = delay_min;
+95                               busy_max = delay_max;
+96                            end
+97                         endtask
+98                      
+99                         task set_fixed_delay;
+100                           input [31:0] delay;
+101                           begin
+102                              busy_rand_enable = 0;
+103                              busy_delay = delay;
+104                           end
+105                        endtask
+106                     
+107                        task set_slverr;
+108                           input [31:0] addr;
+109                           begin
+110                              err_enable = 1;
+111                              err_addr = addr;
+112                           end
+113                        endtask
+114                     
+115                       always @(negedge dif.pclk or negedge dif.rst_n) begin
+116        1/1              if (dif.rst_n==0) begin
+117        1/1                apb_st <=0;
+118        1/1                dif.prdata <=0;
+119        1/1                dif.pready <=1;
+120        2/2                for(int i=0;i<256;i++) mem[i]=i;
+121                         end
+122                         else begin
+123        1/1                case (apb_st)
+124                             SETUP: begin
+125        1/1                    dif.prdata <= 0;
+126        1/1                    if (dif.psel && !dif.penable) begin
+127        1/1                      if (dif.pwrite) begin
+128        1/1                        apb_st <= W_ENABLE;
+129                                 end
+130                                 else begin
+131        1/1                        apb_st <= R_ENABLE;
+132                                 end
+133                               end
+                        MISSING_ELSE
+134                             end
+135                             W_ENABLE: begin
+136        1/1          	      if(dif.pready) begin
+137        1/1                    if (dif.psel && dif.penable && dif.pwrite) begin
+138        1/1                      if((dif.paddr == 'h0) || (dif.paddr == 'h4) || (dif.paddr == 'h8) || (dif.paddr == 'hC) ) begin
+139        0/1     ==>                case (dif.paddr)
+140        0/1     ==>                 'h0   : ctl_reg  <= dif.pwdata;
+141        0/1     ==>                 'h4   : timer_0  <= dif.pwdata;
+142        0/1     ==>                 'h8   : timer_1  <= dif.pwdata;
+143        0/1     ==>                 'hc   : stat_reg <= dif.pwdata;
+                   ==>  MISSING_DEFAULT
+144                                   endcase
+145                                 end 
+146                                 else begin
+147        1/1                         mem[dif.paddr] <= dif.pwdata;
+148                                 end
+149                               end
+                   ==>  MISSING_ELSE
+150        1/1                    apb_st <= SETUP;
+151                              end
+152                              else begin
+153        1/1                   apb_st <= W_ENABLE;
+154                              end
+155                             end
+156                             R_ENABLE: begin
+157        1/1                    if(dif.pready) begin
+158        1/1                      if (dif.psel && dif.penable && !dif.pwrite) begin
+159        1/1          	            if((dif.paddr == 'h0) || (dif.paddr == 'h4) || (dif.paddr == 'h8) || (dif.paddr == 'hC) ) begin
+160        0/1     ==>  	               dif.prdata <= rdata_tmp;
+161                                    end 
+162                                    else begin
+163        1/1                            dif.prdata <= mem[dif.paddr];
+164                                    end
+165                                 end
+                   ==>  MISSING_ELSE
+166        1/1                      apb_st <= SETUP;
+167                               end
+168                     	       else begin
+169        1/1                      apb_st <= R_ENABLE;
+170                               end
+171                             end
+                   ==>  MISSING_DEFAULT
+
+-------------------------------------------------------------------------------
+Cond Coverage for Module : apb_slave
+
+               Total   Covered  Percent
+Conditions         24        9    37.50
+Logical            24        9    37.50
+Non-Logical         0        0
+Event               0        0
+
+ LINE       54
+ EXPRESSION (err_enable && (dif.paddr == err_addr))
+             -----1----    -----------2-----------
+
+-1- -2- Status
+ 0   1  Not Covered
+ 1   0  Covered
+ 1   1  Covered
+
+ LINE       126
+ EXPRESSION (dif.psel && ((!dif.penable)))
+             ----1---    --------2-------
+
+-1- -2- Status
+ 0   1  Covered
+ 1   0  Covered
+ 1   1  Covered
+
+ LINE       137
+ EXPRESSION (dif.psel && dif.penable && dif.pwrite)
+             ----1---    -----2-----    -----3----
+
+-1- -2- -3- Status
+ 0   1   1  Not Covered
+ 1   0   1  Not Covered
+ 1   1   0  Not Covered
+ 1   1   1  Covered
+
+ LINE       138
+ EXPRESSION ((dif.paddr == 'b0) || (dif.paddr == 'h00000004) || (dif.paddr == 'h00000008) || (dif.paddr == 'h0000000c))
+             ---------1--------    ------------2------------    ------------3------------    ------------4------------
+
+-1- -2- -3- -4- Status
+ 0   0   0   0  Covered
+ 0   0   0   1  Not Covered
+ 0   0   1   0  Not Covered
+ 0   1   0   0  Not Covered
+ 1   0   0   0  Not Covered
+
+ LINE       158
+ EXPRESSION (dif.psel && dif.penable && ((!dif.pwrite)))
+             ----1---    -----2-----    -------3-------
+
+-1- -2- -3- Status
+ 0   1   1  Not Covered
+ 1   0   1  Not Covered
+ 1   1   0  Not Covered
+ 1   1   1  Covered
+
+ LINE       159
+ EXPRESSION ((dif.paddr == 'b0) || (dif.paddr == 'h00000004) || (dif.paddr == 'h00000008) || (dif.paddr == 'h0000000c))
+             ---------1--------    ------------2------------    ------------3------------    ------------4------------
+
+-1- -2- -3- -4- Status
+ 0   0   0   0  Covered
+ 0   0   0   1  Not Covered
+ 0   0   1   0  Not Covered
+ 0   1   0   0  Not Covered
+ 1   0   0   0  Not Covered
+
+-------------------------------------------------------------------------------
+Toggle Coverage for Module : apb_slave
+                Total Covered Percent 
+Totals          13    1       7.69    
+Total Bits      352   5       1.42    
+Total Bits 0->1 176   2       1.14    
+Total Bits 1->0 176   3       1.70    
+
+                              
+Signals          13  1 7.69   
+Signal Bits      352 5 1.42   
+Signal Bits 0->1 176 2 1.14   
+Signal Bits 1->0 176 3 1.70   
+
+Signal Details
+                 Toggle Toggle 1->0 Toggle 0->1 
+apb_st[1:0]      Yes    Yes         Yes         
+SETUP[1:0]       No     No          No          
+W_ENABLE[1:0]    No     No          No          
+R_ENABLE[1:0]    No     No          No          
+busy_rand_enable No     Yes         No          
+err_enable       No     No          No          
+err_addr[31:0]   No     No          No          
+ctl_reg[3:0]     No     No          No          
+stat_reg[1:0]    No     No          No          
+timer_0[31:0]    No     No          No          
+timer_1[31:0]    No     No          No          
+data_in[31:0]    No     No          No          
+rdata_tmp[31:0]  No     No          No          
+
+
+-------------------------------------------------------------------------------
+Branch Coverage for Module : apb_slave
+         Line No. Total Covered Percent 
+Branches          32    19      59.38   
+IF       31       2     2       100.00  
+IF       43       6     2       33.33   
+IF       60       2     2       100.00  
+IF       69       5     5       100.00  
+IF       116      17    8       47.06   
+
+
+31             if (!dif.rst_n) begin
+               -1-      
+32                  data_in  <= 0;
+                    ==>
+33                  ctl_reg  <= 0; 
+34                  stat_reg <= 0; 
+35                  timer_0  <= 32'hcafe_1234; 
+36                  timer_1  <= 32'hface_5678;
+37               end
+                 MISSING_ELSE
+                 ==>
+
+Branches:
+
+-1- Status  
+1   Covered 
+0   Covered 
+
+
+43               if (dif.psel & !dif.pwrite) 
+                 -1-                 
+44                  case (dif.paddr)
+                    -2-  
+                    MISSING_ELSE
+                    ==>
+45                     'h0 : rdata_tmp <= ctl_reg;
+                       ==>
+46                     'h4 : rdata_tmp <= timer_0;
+                       ==>
+47                     'h8 : rdata_tmp <= timer_1;
+                       ==>
+48                     'hc : rdata_tmp <= stat_reg;
+                       ==>
+                       MISSING_DEFAULT
+                       ==>
+
+Branches:
+
+-1- -2-             Status      
+1   'h0             Not Covered 
+1   'h00000004      Not Covered 
+1   'h00000008      Not Covered 
+1   'h0000000c      Not Covered 
+1   MISSING_DEFAULT Covered     
+0   -               Covered     
+
+
+60                     if ($test$plusargs("zerowaitstate"))begin   //argument to disable wait states
+                       -1-  
+61                            busy_rand_enable = 0;
+                              ==>
+62                            busy_delay       = 0;
+63                         end
+                           MISSING_ELSE
+                           ==>
+
+Branches:
+
+-1- Status  
+1   Covered 
+0   Covered 
+
+
+69                 if (dif.psel)
+                   -1-     
+70                   begin
+71                      if (busy_rand_enable)
+                        -2-  
+72                        begin
+73                           busy_delay = $urandom_range(busy_min, busy_max);
+                             ==>
+74                        end
+                          MISSING_ELSE
+                          ==>
+75                      if (busy_delay > 0)
+                        -3-  
+76                        begin
+77                           dif.pready = 1'b0;
+                             ==>
+78                           repeat (busy_delay)
+79                             begin
+80                               @(posedge dif.pclk); 
+81                             end
+82                           dif.pready = 1'b1;
+83                          @(posedge dif.pclk);   
+84         				  end
+           				  MISSING_ELSE
+           				  ==>
+85                   end
+                     MISSING_ELSE
+                     ==>
+
+Branches:
+
+-1- -2- -3- Status  
+1   1   -   Covered 
+1   0   -   Covered 
+1   -   1   Covered 
+1   -   0   Covered 
+0   -   -   Covered 
+
+
+116            if (dif.rst_n==0) begin
+               -1-     
+117              apb_st <=0;
+                 ==>
+118              dif.prdata <=0;
+119              dif.pready <=1;
+120              for(int i=0;i<256;i++) mem[i]=i;
+121            end
+122            else begin
+123              case (apb_st)
+                 -2-  
+124                SETUP: begin
+125                  dif.prdata <= 0;
+126                  if (dif.psel && !dif.penable) begin
+                     -3-                  
+127                    if (dif.pwrite) begin
+                       -4-     
+128                      apb_st <= W_ENABLE;
+                         ==>
+129                    end
+130                    else begin
+131                      apb_st <= R_ENABLE;
+                         ==>
+132                    end
+133                  end
+                     MISSING_ELSE
+                     ==>
+134                end
+135                W_ENABLE: begin
+136        	      if(dif.pready) begin
+           	      -5-    
+137                  if (dif.psel && dif.penable && dif.pwrite) begin
+                     -6-                                
+138                    if((dif.paddr == 'h0) || (dif.paddr == 'h4) || (dif.paddr == 'h8) || (dif.paddr == 'hC) ) begin
+                       -7-                                                                       
+139                      case (dif.paddr)
+                         -8-  
+140                       'h0   : ctl_reg  <= dif.pwdata;
+                          ==>
+141                       'h4   : timer_0  <= dif.pwdata;
+                          ==>
+142                       'h8   : timer_1  <= dif.pwdata;
+                          ==>
+143                       'hc   : stat_reg <= dif.pwdata;
+                          ==>
+                          MISSING_DEFAULT
+                          ==>
+144                      endcase
+145                    end 
+146                    else begin
+147                       mem[dif.paddr] <= dif.pwdata;
+                          ==>
+148                    end
+149                  end
+                     MISSING_ELSE
+                     ==>
+150                  apb_st <= SETUP;
+151                 end
+152                 else begin
+153                 apb_st <= W_ENABLE;
+                    ==>
+154                 end
+155                end
+156                R_ENABLE: begin
+157                  if(dif.pready) begin
+                     -9-    
+158                    if (dif.psel && dif.penable && !dif.pwrite) begin
+                       -10-                                 
+159        	            if((dif.paddr == 'h0) || (dif.paddr == 'h4) || (dif.paddr == 'h8) || (dif.paddr == 'hC) ) begin
+           	            -11-                                                                       
+160        	               dif.prdata <= rdata_tmp;
+           	               ==>
+161                       end 
+162                       else begin
+163                          dif.prdata <= mem[dif.paddr];
+                             ==>
+164                       end
+165                    end
+                       MISSING_ELSE
+                       ==>
+166                    apb_st <= SETUP;
+167                  end
+168        	       else begin
+169                    apb_st <= R_ENABLE;
+                       ==>
+170                  end
+171                end
+                   MISSING_DEFAULT
+                   ==>
+
+Branches:
+
+-1- -2-             -3- -4- -5- -6- -7- -8-             -9- -10- -11- Status      
+1   -               -   -   -   -   -   -               -   -    -    Covered     
+0   SETUP           1   1   -   -   -   -               -   -    -    Covered     
+0   SETUP           1   0   -   -   -   -               -   -    -    Covered     
+0   SETUP           0   -   -   -   -   -               -   -    -    Covered     
+0   W_ENABLE        -   -   1   1   1   'h0             -   -    -    Not Covered 
+0   W_ENABLE        -   -   1   1   1   'h00000004      -   -    -    Not Covered 
+0   W_ENABLE        -   -   1   1   1   'h00000008      -   -    -    Not Covered 
+0   W_ENABLE        -   -   1   1   1   'h0000000c      -   -    -    Not Covered 
+0   W_ENABLE        -   -   1   1   1   MISSING_DEFAULT -   -    -    Not Covered 
+0   W_ENABLE        -   -   1   1   0   -               -   -    -    Covered     
+0   W_ENABLE        -   -   1   0   -   -               -   -    -    Not Covered 
+0   W_ENABLE        -   -   0   -   -   -               -   -    -    Covered     
+0   R_ENABLE        -   -   -   -   -   -               1   1    1    Not Covered 
+0   R_ENABLE        -   -   -   -   -   -               1   1    0    Covered     
+0   R_ENABLE        -   -   -   -   -   -               1   0    -    Not Covered 
+0   R_ENABLE        -   -   -   -   -   -               0   -    -    Covered     
+0   MISSING_DEFAULT -   -   -   -   -   -               -   -    -    Not Covered 
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Module Instance : apb_top.dut
+===============================================================================
+
+Instance :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 45.34  83.05  37.50   1.42 --      59.38 --     
+
+
+Instance's subtree :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 45.34  83.05  37.50   1.42 --      59.38 --     
+
+
+Module : 
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME      
+ 45.34  83.05  37.50   1.42 --      59.38 --     apb_slave 
+
+
+Parent : 
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME    
+100.00 100.00 --     100.00 --     --     --     apb_top 
+
+
+Subtrees :
+
+
+no children
+----------------
+
+
+-------------------------------------------------------------------------------
+Since this is the module's only instance, the coverage report is the same as for the module.
+===============================================================================
+Module : apb_interface
+===============================================================================
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 87.62 --     --      75.24 --     --     100.00 
+
+Source File(s) : 
+
+/home/dvft0904/apb_sv_project/sim/../env/interface.sv
+
+Module self-instances :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME        
+ 87.62 --     --      75.24 --     --     100.00 apb_top.vif 
+
+
+
+-------------------------------------------------------------------------------
+Toggle Coverage for Module : apb_interface
+                Total Covered Percent 
+Totals          10    7       70.00   
+Total Bits      206   155     75.24   
+Total Bits 0->1 103   77      74.76   
+Total Bits 1->0 103   78      75.73   
+
+                          
+Ports          1 1 100.00 
+Port Bits      2 2 100.00 
+Port Bits 0->1 1 1 100.00 
+Port Bits 1->0 1 1 100.00 
+
+                                
+Signals          9   6   66.67  
+Signal Bits      204 153 75.00  
+Signal Bits 0->1 102 76  74.51  
+Signal Bits 1->0 102 77  75.49  
+
+Port Details
+     Toggle Toggle 1->0 Toggle 0->1 Direction 
+pclk Yes    Yes         Yes         INPUT     
+
+Signal Details
+             Toggle Toggle 1->0 Toggle 0->1 
+rst_n        Yes    Yes         Yes         
+paddr[7:0]   Yes    Yes         Yes         
+paddr[31:8]  No     No          No          
+pwdata[31:0] Yes    Yes         Yes         
+pwrite       No     Yes         No          
+psel         Yes    Yes         Yes         
+penable      Yes    Yes         Yes         
+prdata[31:0] Yes    Yes         Yes         
+pready       Yes    Yes         Yes         
+pslverr      No     No          No          
+
+
+-------------------------------------------------------------------------------
+Assert Coverage for Module : apb_interface
+                 Total Attempted Percent Succeeded/Matched Percent 
+Assertions       1     1         100.00  1                 100.00  
+Cover properties 0     0                 0                         
+Cover sequences  0     0                 0                         
+Total            1     1         100.00  1                 100.00  
+
+
+
+-------------------------------------------------------------------------------
+
+Assertion Details
+
+Name            Attempts Real Successes Failures Incomplete 
+assertion_check 2000     138            0        0          
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Module Instance : apb_top.vif
+===============================================================================
+
+Instance :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 87.62 --     --      75.24 --     --     100.00 
+
+
+Instance's subtree :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 87.62 --     --      75.24 --     --     100.00 
+
+
+Module : 
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME          
+ 87.62 --     --      75.24 --     --     100.00 apb_interface 
+
+
+Parent : 
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME    
+100.00 100.00 --     100.00 --     --     --     apb_top 
+
+
+Subtrees :
+
+
+no children
+----------------
+
+
+-------------------------------------------------------------------------------
+Since this is the module's only instance, the coverage report is the same as for the module.
+===============================================================================
+Module : apb_top
+===============================================================================
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+100.00 100.00 --     100.00 --     --     --     
+
+Source File(s) : 
+
+/home/dvft0904/apb_sv_project/sim/../top/top.sv
+
+Module self-instances :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME    
+100.00 100.00 --     100.00 --     --     --     apb_top 
+
+
+
+-------------------------------------------------------------------------------
+Line Coverage for Module : apb_top
+
+             Line No.   Total   Covered  Percent
+TOTAL                       12       12   100.00
+ALWAYS              7        2        2   100.00
+INITIAL             9        5        5   100.00
+INITIAL            15        5        5   100.00
+
+6                       test ts;
+7          2/2          always #5 pclk=~pclk;
+8                       initial begin
+9          1/1             pclk=0;
+10         1/1             vif.rst_n=0;
+11         2/2             #40;
+12         1/1             vif.rst_n=1;
+13                      end
+14                      initial begin
+15         1/1             ts=new(vif);
+16         1/1             ts.run();
+17         2/2             #2000;
+18         1/1             $finish;
+
+-------------------------------------------------------------------------------
+Toggle Coverage for Module : apb_top
+                Total Covered Percent 
+Totals          1     1       100.00  
+Total Bits      2     2       100.00  
+Total Bits 0->1 1     1       100.00  
+Total Bits 1->0 1     1       100.00  
+
+                            
+Signals          1 1 100.00 
+Signal Bits      2 2 100.00 
+Signal Bits 0->1 1 1 100.00 
+Signal Bits 1->0 1 1 100.00 
+
+Signal Details
+     Toggle Toggle 1->0 Toggle 0->1 
+pclk Yes    Yes         Yes         
+
+
+-------------------------------------------------------------------------------
+===============================================================================
+Module Instance : apb_top
+===============================================================================
+
+Instance :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+100.00 100.00 --     100.00 --     --     --     
+
+
+Instance's subtree :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 62.34  85.92  37.50  28.93 --      59.38 100.00 
+
+
+Module : 
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME    
+100.00 100.00 --     100.00 --     --     --     apb_top 
+
+
+Parent : 
+
+none
+----------------
+
+
+Subtrees :
+
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME 
+ 45.34  83.05  37.50   1.42 --      59.38 --     dut  
+ 87.62 --     --      75.24 --     --     100.00 vif  
+
+
+
+-------------------------------------------------------------------------------
+Since this is the module's only instance, the coverage report is the same as for the module.

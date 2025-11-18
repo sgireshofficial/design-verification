@@ -1,0 +1,14 @@
+Design Module List
+
+Total Module Definition Coverage Summary 
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 62.34  85.92  37.50  28.93 --      59.38 100.00 
+
+
+Total modules in report: 3
+-------------------------------------------------------------------------------
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME          
+ 45.34  83.05  37.50   1.42 --      59.38 --     apb_slave     
+ 87.62 --     --      75.24 --     --     100.00 apb_interface 
+100.00 100.00 --     100.00 --     --     --     apb_top       
+

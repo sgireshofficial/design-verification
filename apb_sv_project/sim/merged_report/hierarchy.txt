@@ -1,0 +1,12 @@
+Design Hierarchy
+
+
+----------------
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT         
+ 62.34  85.92  37.50  28.93 --      59.38 100.00 apb_top 
+  
+  ----------------
+  SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT     
+   45.34  83.05  37.50   1.42 --      59.38 --     dut 
+   87.62 --     --      75.24 --     --     100.00 vif 
+

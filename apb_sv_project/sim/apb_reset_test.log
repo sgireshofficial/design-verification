@@ -1,0 +1,233 @@
+
+Error-[VERDI_VCS_MM] Possible VERDI_HOME and VCS_HOME mismatch
+  The Verdi tab and pli.a cannot be added to the 'vcs' compile command because
+  the file '/pli.a' could not be found.
+  Please check to make sure VERDI_HOME and VCS_HOME point to installations 
+  that are either both 32-bits or both 64-bits.
+
+Command: vcs -R -full64 -sverilog -kdb -debug_access+all -override_timescale=1ns/1ns \
+../rtl/apb_slave_design.sv ../env/interface.sv ../test/package.sv ../top/top.sv +incdir+/home/dvft0904/apb_sv_project/test/ \
++incdir+/home/dvft0904/apb_sv_project/env/ +incdir+/home/dvft0904/apb_sv_project/top/ \
++apb_reset_test +seed=3045900580 -cm line+cond+fsm+tgl+branch+assert -cm_dir apb_reset_test_coverage.vdb \
+-l apb_reset_test.log
+                         Chronologic VCS (TM)
+         Version T-2022.06_Full64 -- Tue Sep 16 17:56:22 2025
+
+                    Copyright (c) 1991 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '../rtl/apb_slave_design.sv'
+Parsing design file '../env/interface.sv'
+Parsing design file '../test/package.sv'
+Parsing included file '/home/dvft0904/apb_sv_project/env/transaction.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/generator.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/driver.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/monitor.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/predictor.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/scoreboard.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/environment.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_read_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_read_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_slverr_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_read_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_read_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_slverr_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_reset_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_reset_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+
+Warning-[IPDW] Identifier previously declared
+/home/dvft0904/apb_sv_project/test/test.sv, 21
+  Second declaration for identifier 'apb_sl_withoutwait' ignored
+  Identifier 'apb_sl_withoutwait' previously declared as <UserDefinedType>. 
+  [/home/dvft0904/apb_sv_project/test/test.sv, 20]
+
+Back to file '../test/package.sv'.
+Parsing design file '../top/top.sv'
+Top Level Modules:
+       apb_top
+TimeScale is 1 ns / 1 ns
+VCS Coverage Metrics Release T-2022.06_Full64 Copyright (c) 1991-2022 by Synopsys Inc.
+
+Warning-[DRTZ] Detect delay value roundoff to 0
+  Delay from design or SDF file roundoff to 0 based on timescale
+  Please use switch -diag timescale to dump detailed information.
+
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+3 modules and 0 UDP read.
+recompiling module apb_top
+	However, due to incremental compilation, only 1 module needs to be compiled. 
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -shared  -Bsymbolic   -o .//../simv.daidir//_cuarc0.so objs/amcQw_d.o 
+rm -f _cuarc0.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir \
+-Wl,-rpath=/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib -L/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib \
+-Wl,-rpath-link=./  /usr/lib64/libnuma.so.1     _21396_archive_1.so _prev_archive_1.so \
+_cuarc0.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o \
+rmar_llvm_0_0.o           -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile \
+-lreader_common /home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/libBA.a -luclinative \
+/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/vcs_tls.o   -Wl,-whole-archive \
+-lvcsucli    -Wl,-no-whole-archive          /home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/vcs_save_restore_new.o \
+-ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+Command: /home/dvft0904/apb_sv_project/sim/./simv +apb_reset_test +seed=3045900580 -cm_runsilent -cm line+cond+fsm+tgl+branch+assert -cm_dir apb_reset_test_coverage.vdb -a apb_reset_test.log +incdir+/home/dvft0904/apb_sv_project/test/ +incdir+/home/dvft0904/apb_sv_project/env/ +incdir+/home/dvft0904/apb_sv_project/top/
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Sep 16 17:56 2025
+time=0 inside APB_RESET_TEST_CASE
+***************************************************
+[gen][0] psel=0 penable=0 pwrite=1 paddr=bd pwdata=83608aa1 pready=0 prdata=0 pslverr=0
+[drv][25] psel=0 penable=0 pwrite=1 paddr=bd pwdata=83608aa1 pready=0 prdata=0 pslverr=0
+[mon][45] psel=1 penable=1 pwrite=1 paddr=bd pwdata=83608aa1 pready=1 prdata=0 pslverr=0
+[PRE][45] psel=1 penable=1 pwrite=1 paddr=bd pwdata=83608aa1 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][45] psel=0 penable=0 pwrite=1 paddr=48 pwdata=664b653e pready=0 prdata=0 pslverr=0
+[drv][75] psel=0 penable=0 pwrite=1 paddr=48 pwdata=664b653e pready=0 prdata=0 pslverr=0
+[mon][115] psel=1 penable=1 pwrite=1 paddr=48 pwdata=664b653e pready=1 prdata=0 pslverr=0
+[PRE][115] psel=1 penable=1 pwrite=1 paddr=48 pwdata=664b653e pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][115] psel=0 penable=0 pwrite=1 paddr=7b pwdata=b5f9d968 pready=0 prdata=0 pslverr=0
+[drv][145] psel=0 penable=0 pwrite=1 paddr=7b pwdata=b5f9d968 pready=0 prdata=0 pslverr=0
+[mon][165] psel=1 penable=1 pwrite=1 paddr=7b pwdata=b5f9d968 pready=1 prdata=0 pslverr=0
+[PRE][165] psel=1 penable=1 pwrite=1 paddr=7b pwdata=b5f9d968 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][165] psel=0 penable=0 pwrite=1 paddr=55 pwdata=ae1e826b pready=0 prdata=0 pslverr=0
+[drv][195] psel=0 penable=0 pwrite=1 paddr=55 pwdata=ae1e826b pready=0 prdata=0 pslverr=0
+[mon][215] psel=1 penable=1 pwrite=1 paddr=55 pwdata=ae1e826b pready=1 prdata=0 pslverr=0
+[PRE][215] psel=1 penable=1 pwrite=1 paddr=55 pwdata=ae1e826b pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][215] psel=0 penable=0 pwrite=1 paddr=2d pwdata=b5f5f79a pready=0 prdata=0 pslverr=0
+[drv][245] psel=0 penable=0 pwrite=1 paddr=2d pwdata=b5f5f79a pready=0 prdata=0 pslverr=0
+[mon][265] psel=1 penable=1 pwrite=1 paddr=2d pwdata=b5f5f79a pready=1 prdata=0 pslverr=0
+[PRE][265] psel=1 penable=1 pwrite=1 paddr=2d pwdata=b5f5f79a pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][265] psel=0 penable=0 pwrite=1 paddr=4a pwdata=a4d295ea pready=0 prdata=0 pslverr=0
+[drv][295] psel=0 penable=0 pwrite=1 paddr=4a pwdata=a4d295ea pready=0 prdata=0 pslverr=0
+[mon][345] psel=1 penable=1 pwrite=1 paddr=4a pwdata=a4d295ea pready=1 prdata=0 pslverr=0
+[PRE][345] psel=1 penable=1 pwrite=1 paddr=4a pwdata=a4d295ea pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][345] psel=0 penable=0 pwrite=1 paddr=7b pwdata=b0976e82 pready=0 prdata=0 pslverr=0
+[drv][375] psel=0 penable=0 pwrite=1 paddr=7b pwdata=b0976e82 pready=0 prdata=0 pslverr=0
+[mon][395] psel=1 penable=1 pwrite=1 paddr=7b pwdata=b0976e82 pready=1 prdata=0 pslverr=0
+[PRE][395] psel=1 penable=1 pwrite=1 paddr=7b pwdata=b0976e82 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][395] psel=0 penable=0 pwrite=1 paddr=7b pwdata=89dc81cc pready=0 prdata=0 pslverr=0
+[drv][425] psel=0 penable=0 pwrite=1 paddr=7b pwdata=89dc81cc pready=0 prdata=0 pslverr=0
+[mon][455] psel=1 penable=1 pwrite=1 paddr=7b pwdata=89dc81cc pready=1 prdata=0 pslverr=0
+[PRE][455] psel=1 penable=1 pwrite=1 paddr=7b pwdata=89dc81cc pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][455] psel=0 penable=0 pwrite=1 paddr=9c pwdata=22ce98a7 pready=0 prdata=0 pslverr=0
+[drv][485] psel=0 penable=0 pwrite=1 paddr=9c pwdata=22ce98a7 pready=0 prdata=0 pslverr=0
+[mon][505] psel=1 penable=1 pwrite=1 paddr=9c pwdata=22ce98a7 pready=1 prdata=0 pslverr=0
+[PRE][505] psel=1 penable=1 pwrite=1 paddr=9c pwdata=22ce98a7 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][505] psel=0 penable=0 pwrite=1 paddr=4a pwdata=f0e76be3 pready=0 prdata=0 pslverr=0
+[drv][535] psel=0 penable=0 pwrite=1 paddr=4a pwdata=f0e76be3 pready=0 prdata=0 pslverr=0
+[mon][555] psel=1 penable=1 pwrite=1 paddr=4a pwdata=f0e76be3 pready=1 prdata=0 pslverr=0
+[PRE][555] psel=1 penable=1 pwrite=1 paddr=4a pwdata=f0e76be3 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][555] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][585] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][605] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=0 pslverr=0
+[PRE][605] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=664b653e pslverr=0
+[SCO][605] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=664b653e
+***************************************************
+[gen][605] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][635] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][655] psel=1 penable=1 pwrite=0 paddr=7b pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][655] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][685] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][705] psel=1 penable=1 pwrite=0 paddr=4a pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][705] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][735] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][755] psel=1 penable=1 pwrite=0 paddr=bd pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][755] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][785] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][805] psel=1 penable=1 pwrite=0 paddr=7b pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][805] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][835] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][855] psel=1 penable=1 pwrite=0 paddr=bd pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][855] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][885] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][905] psel=1 penable=1 pwrite=0 paddr=7b pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][905] psel=0 penable=0 pwrite=0 paddr=9c pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][935] psel=0 penable=0 pwrite=0 paddr=9c pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][955] psel=1 penable=1 pwrite=0 paddr=9c pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][955] psel=0 penable=0 pwrite=0 paddr=86 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][985] psel=0 penable=0 pwrite=0 paddr=86 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][1005] psel=1 penable=1 pwrite=0 paddr=86 pwdata=0 pready=1 prdata=0 pslverr=0
+***************************************************
+[gen][1005] psel=0 penable=0 pwrite=0 paddr=38 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][1035] psel=0 penable=0 pwrite=0 paddr=38 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][1055] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=0 pslverr=0
+[PRE][1815] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1815] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1825] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1825] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1835] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1835] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1845] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1845] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1855] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1855] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1865] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1865] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1875] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1875] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1885] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1885] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+[PRE][1895] psel=1 penable=1 pwrite=0 paddr=38 pwdata=0 pready=1 prdata=38 pslverr=0
+[SCO][1895] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=38
+$finish called from file "../top/top.sv", line 18.
+$finish at simulation time                 2000
+
+---------------------------------------------------------------------------
+VCS Coverage Metrics: during simulation line, cond, FSM, branch, tgl was monitored
+---------------------------------------------------------------------------
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2000 ns
+CPU Time:      0.630 seconds;       Data structure size:   0.0Mb
+Tue Sep 16 17:56:24 2025
+CPU time: 1.159 seconds to compile + .621 seconds to elab + .350 seconds to link + .696 seconds in simulation
+Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)

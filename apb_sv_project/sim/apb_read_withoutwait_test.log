@@ -1,0 +1,184 @@
+
+Error-[VERDI_VCS_MM] Possible VERDI_HOME and VCS_HOME mismatch
+  The Verdi tab and pli.a cannot be added to the 'vcs' compile command because
+  the file '/pli.a' could not be found.
+  Please check to make sure VERDI_HOME and VCS_HOME point to installations 
+  that are either both 32-bits or both 64-bits.
+
+Command: vcs -R -full64 -sverilog -kdb -debug_access+all -override_timescale=1ns/1ns \
+../rtl/apb_slave_design.sv ../env/interface.sv ../test/package.sv ../top/top.sv +incdir+/home/dvft0904/apb_sv_project/test/ \
++incdir+/home/dvft0904/apb_sv_project/env/ +incdir+/home/dvft0904/apb_sv_project/top/ \
++apb_read_withoutwait_test +seed=188269780 +zerowaitstate -cm line+cond+fsm+tgl+branch+assert \
+-cm_dir apb_read_withoutwait_test_coverage.vdb -l apb_read_withoutwait_test.log
+                         Chronologic VCS (TM)
+         Version T-2022.06_Full64 -- Tue Sep 16 17:56:34 2025
+
+                    Copyright (c) 1991 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file '../rtl/apb_slave_design.sv'
+Parsing design file '../env/interface.sv'
+Parsing design file '../test/package.sv'
+Parsing included file '/home/dvft0904/apb_sv_project/env/transaction.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/generator.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/driver.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/monitor.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/predictor.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/scoreboard.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/env/environment.sv'.
+Back to file '../test/package.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_read_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_read_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_slverr_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_read_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_write_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_read_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_slverr_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_reset_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+Parsing included file '/home/dvft0904/apb_sv_project/test/apb_reset_withoutwait_test.sv'.
+Back to file '/home/dvft0904/apb_sv_project/test/test.sv'.
+
+Warning-[IPDW] Identifier previously declared
+/home/dvft0904/apb_sv_project/test/test.sv, 21
+  Second declaration for identifier 'apb_sl_withoutwait' ignored
+  Identifier 'apb_sl_withoutwait' previously declared as <UserDefinedType>. 
+  [/home/dvft0904/apb_sv_project/test/test.sv, 20]
+
+Back to file '../test/package.sv'.
+Parsing design file '../top/top.sv'
+Top Level Modules:
+       apb_top
+TimeScale is 1 ns / 1 ns
+VCS Coverage Metrics Release T-2022.06_Full64 Copyright (c) 1991-2022 by Synopsys Inc.
+
+Warning-[DRTZ] Detect delay value roundoff to 0
+  Delay from design or SDF file roundoff to 0 based on timescale
+  Please use switch -diag timescale to dump detailed information.
+
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+3 modules and 0 UDP read.
+recompiling module apb_top
+	However, due to incremental compilation, only 1 module needs to be compiled. 
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+ld -shared  -Bsymbolic   -o .//../simv.daidir//_cuarc0.so objs/amcQw_d.o 
+rm -f _cuarc0.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir \
+-Wl,-rpath=/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib -L/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib \
+-Wl,-rpath-link=./  /usr/lib64/libnuma.so.1     _24582_archive_1.so _prev_archive_1.so \
+_cuarc0.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o \
+rmar_llvm_0_0.o           -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile \
+-lreader_common /home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/libBA.a -luclinative \
+/home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/vcs_tls.o   -Wl,-whole-archive \
+-lvcsucli    -Wl,-no-whole-archive          /home/tools/synopsys/vcs_2022/T-2022.06/linux64/lib/vcs_save_restore_new.o \
+-ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+Command: /home/dvft0904/apb_sv_project/sim/./simv +apb_read_withoutwait_test +seed=188269780 +zerowaitstate -cm_runsilent -cm line+cond+fsm+tgl+branch+assert -cm_dir apb_read_withoutwait_test_coverage.vdb -a apb_read_withoutwait_test.log +incdir+/home/dvft0904/apb_sv_project/test/ +incdir+/home/dvft0904/apb_sv_project/env/ +incdir+/home/dvft0904/apb_sv_project/top/
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Sep 16 17:56 2025
+time=0 inside APB_READ_WITHOUTWAIT_TEST_CASE
+***************************************************
+[gen][0] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+apb_zero_wait_state
+[drv][25] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][45] psel=1 penable=1 pwrite=0 paddr=4a pwdata=0 pready=1 prdata=0 pslverr=0
+[PRE][45] psel=1 penable=1 pwrite=0 paddr=4a pwdata=0 pready=1 prdata=4a pslverr=0
+[SCO][45] [FAIL]: [MON]prdata=0<=======>[PRE]prdata=4a
+***************************************************
+[gen][45] psel=0 penable=0 pwrite=0 paddr=86 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][75] psel=0 penable=0 pwrite=0 paddr=86 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][95] psel=1 penable=1 pwrite=0 paddr=86 pwdata=0 pready=1 prdata=86 pslverr=0
+[PRE][95] psel=1 penable=1 pwrite=0 paddr=86 pwdata=0 pready=1 prdata=86 pslverr=0
+[SCO][95] [PASS]: [MON]prdata=86<=======>[PRE]prdata=86
+***************************************************
+[gen][95] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][125] psel=0 penable=0 pwrite=0 paddr=bd pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][145] psel=1 penable=1 pwrite=0 paddr=bd pwdata=0 pready=1 prdata=bd pslverr=0
+[PRE][145] psel=1 penable=1 pwrite=0 paddr=bd pwdata=0 pready=1 prdata=bd pslverr=0
+[SCO][145] [PASS]: [MON]prdata=bd<=======>[PRE]prdata=bd
+***************************************************
+[gen][145] psel=0 penable=0 pwrite=0 paddr=2d pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][175] psel=0 penable=0 pwrite=0 paddr=2d pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][195] psel=1 penable=1 pwrite=0 paddr=2d pwdata=0 pready=1 prdata=2d pslverr=0
+[PRE][195] psel=1 penable=1 pwrite=0 paddr=2d pwdata=0 pready=1 prdata=2d pslverr=0
+[SCO][195] [PASS]: [MON]prdata=2d<=======>[PRE]prdata=2d
+***************************************************
+[gen][195] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][225] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][245] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=48 pslverr=0
+[PRE][245] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=48 pslverr=0
+[SCO][245] [PASS]: [MON]prdata=48<=======>[PRE]prdata=48
+***************************************************
+[gen][245] psel=0 penable=0 pwrite=0 paddr=59 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][275] psel=0 penable=0 pwrite=0 paddr=59 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][295] psel=1 penable=1 pwrite=0 paddr=59 pwdata=0 pready=1 prdata=59 pslverr=0
+[PRE][295] psel=1 penable=1 pwrite=0 paddr=59 pwdata=0 pready=1 prdata=59 pslverr=0
+[SCO][295] [PASS]: [MON]prdata=59<=======>[PRE]prdata=59
+***************************************************
+[gen][295] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][325] psel=0 penable=0 pwrite=0 paddr=48 pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][345] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=48 pslverr=0
+[PRE][345] psel=1 penable=1 pwrite=0 paddr=48 pwdata=0 pready=1 prdata=48 pslverr=0
+[SCO][345] [PASS]: [MON]prdata=48<=======>[PRE]prdata=48
+***************************************************
+[gen][345] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][375] psel=0 penable=0 pwrite=0 paddr=4a pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][395] psel=1 penable=1 pwrite=0 paddr=4a pwdata=0 pready=1 prdata=4a pslverr=0
+[PRE][395] psel=1 penable=1 pwrite=0 paddr=4a pwdata=0 pready=1 prdata=4a pslverr=0
+[SCO][395] [PASS]: [MON]prdata=4a<=======>[PRE]prdata=4a
+***************************************************
+[gen][395] psel=0 penable=0 pwrite=0 paddr=9c pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][425] psel=0 penable=0 pwrite=0 paddr=9c pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][445] psel=1 penable=1 pwrite=0 paddr=9c pwdata=0 pready=1 prdata=9c pslverr=0
+[PRE][445] psel=1 penable=1 pwrite=0 paddr=9c pwdata=0 pready=1 prdata=9c pslverr=0
+[SCO][445] [PASS]: [MON]prdata=9c<=======>[PRE]prdata=9c
+***************************************************
+[gen][445] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[drv][475] psel=0 penable=0 pwrite=0 paddr=7b pwdata=0 pready=0 prdata=0 pslverr=0
+[mon][495] psel=1 penable=1 pwrite=0 paddr=7b pwdata=0 pready=1 prdata=7b pslverr=0
+[PRE][495] psel=1 penable=1 pwrite=0 paddr=7b pwdata=0 pready=1 prdata=7b pslverr=0
+[SCO][495] [PASS]: [MON]prdata=7b<=======>[PRE]prdata=7b
+$finish called from file "../top/top.sv", line 18.
+$finish at simulation time                 2000
+
+---------------------------------------------------------------------------
+VCS Coverage Metrics: during simulation line, cond, FSM, branch, tgl was monitored
+---------------------------------------------------------------------------
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2000 ns
+CPU Time:      0.610 seconds;       Data structure size:   0.0Mb
+Tue Sep 16 17:56:37 2025
+CPU time: 1.128 seconds to compile + .614 seconds to elab + .342 seconds to link + .674 seconds in simulation
+Verdi KDB elaboration done and the database successfully generated: 0 error(s), 0 warning(s)

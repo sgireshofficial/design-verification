@@ -1,0 +1,35 @@
+Assertions
+
+
+Assertions by Category
+           ASSERT PROPERTIES SEQUENCES
+Total           1          0         0
+Category 0      1          0         0
+
+-------------------------------------------------------------------------------
+
+Assertions by Severity
+           ASSERT PROPERTIES SEQUENCES
+Total           1          0         0
+Severity 0      1          0         0
+
+-------------------------------------------------------------------------------
+
+Summary for Assertions
+                 NUMBER PERCENT
+Total Number          1  100.00
+Uncovered             0    0.00
+Success               1  100.00
+Failure               0    0.00
+Incomplete            0    0.00
+Without Attempts      0    0.00
+
+-------------------------------------------------------------------------------
+
+Detail Report for Assertions
+
+Assertions Success:
+         ASSERTIONS         CATEGORY SEVERITY ATTEMPTS REAL SUCCESSES FAILURES INCOMPLETE
+apb_top.vif.assertion_check        0        0     2000            138        0          0
+
+

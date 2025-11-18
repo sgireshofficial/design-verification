@@ -1,0 +1,50 @@
+<session version="1.1" release="T-2022.06" timestp="2025-09-16 12:26:45 GMT">
+  <info>
+    <attr name="datetime" value="Tue Sep 16 17:57:07 2025
+"/>
+    <attr name="command" value="urg -dir apb_write_read_test_coverage.vdb apb_write_test_coverage.vdb apb_read_test_coverage.vdb apb_slverr_test_coverage.vdb apb_reset_test_coverage.vdb apb_write_read_withoutwait_test_coverage.vdb apb_write_withoutwait_test_coverage.vdb apb_read_withoutwait_test_coverage.vdb apb_slverr_withoutwait_test_coverage.vdb apb_reset_withoutwait_test_coverage.vdb -format both -report merged_report"/>
+    <attr name="top_instance" value="apb_top"/>
+  </info>
+  <hvp>
+    <datadef>
+      <metdef name="Line" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Cond" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Toggle" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="FSM" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Branch" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Assert" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Group" type="percent" aggregator="average" builtin="1" />
+    </datadef>
+  </hvp>
+  <old_coverage>
+  <scope type="top" name="top">
+    <metric name="Line" value="61/71" />
+    <metric name="Cond" value="9/24" />
+    <metric name="Toggle" value="162/560" />
+    <metric name="Branch" value="19/32" />
+    <metric name="Assert" value="1/1" />
+    <metric name="Group" value="87.5%" />
+  </scope>
+  <scope type="instance" name="top">
+  </scope>
+  <scope type="group" name="top">
+    <scope type="group" name="apb_pkg::apb_scoreboard::apb_cov1">
+      <metric name="Group" value="87.5%" />
+    </scope>
+  </scope>
+  <scope type="assert" name="Statistics">
+    <scorelist type="total" name="Design Hierarchy Assert">
+      <score name="Assert" value="1/1" />
+      <score name="Score" value="100.00" />
+    </scorelist>
+    <scorelist type="total" name="Module List Assert">
+      <score name="Assert" value="1/1" />
+      <score name="Score" value="100.00" />
+    </scorelist>
+    <scorelist type="total" name="Assertion">
+      <score name="Assert" value="1/1" />
+      <score name="Score" value="100.00" />
+    </scorelist>
+  </scope>
+  </old_coverage>
+</session>

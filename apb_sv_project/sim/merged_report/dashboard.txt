@@ -1,0 +1,33 @@
+Dashboard
+
+Date: Tue Sep 16 17:57:07 2025
+
+User: dvft0904
+
+Version: T-2022.06
+Command line: urg -dir apb_write_read_test_coverage.vdb apb_write_test_coverage.vdb apb_read_test_coverage.vdb apb_slverr_test_coverage.vdb apb_reset_test_coverage.vdb apb_write_read_withoutwait_test_coverage.vdb apb_write_withoutwait_test_coverage.vdb apb_read_withoutwait_test_coverage.vdb apb_slverr_withoutwait_test_coverage.vdb apb_reset_withoutwait_test_coverage.vdb -format both -report merged_report
+Number of tests: 10
+
+-------------------------------------------------------------------------------
+Total Coverage Summary 
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT GROUP  
+ 66.54  85.92  37.50  28.93 --      59.38 100.00  87.50 
+
+
+-------------------------------------------------------------------------------
+Hierarchical coverage data for top-level instances 
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT NAME    
+ 62.34  85.92  37.50  28.93 --      59.38 100.00 apb_top 
+
+
+-------------------------------------------------------------------------------
+Total Module Definition Coverage Summary 
+SCORE  LINE   COND   TOGGLE FSM    BRANCH ASSERT 
+ 62.34  85.92  37.50  28.93 --      59.38 100.00 
+
+
+-------------------------------------------------------------------------------
+Total Groups Coverage Summary 
+SCORE  WEIGHT 
+ 87.50 1      
+
